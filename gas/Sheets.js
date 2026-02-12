@@ -131,20 +131,37 @@ const DB = {
         // data: { reflection_id, student_id, class_date, content_json, ... }
         data.submission_time = new Date();
         data.feedback_read = false; // default
+        // Force class_date to be string to avoid auto-conversion if possible, 
+        // but 'YYYY-MM-DD' usually stays string unless user edits.
+        // If we want to be safe: data.class_date = "'" + data.class_date; 
+        // But read-side fix is better.
         addRow(SHEET_NAMES.REFLECTIONS, data);
     },
 
     getReflectionsByStudent: (studentId) => {
         const all = getRows(SHEET_NAMES.REFLECTIONS);
-        // Sort by date desc
-        return all.filter(r => r.student_id === studentId).reverse();
+        const filtered = all.filter(r => r.student_id === studentId);
+        // Normalize dates for frontend
+        return filtered.map(r => {
+            if (r.class_date instanceof Date) {
+                r.class_date = Utilities.formatDate(r.class_date, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+            }
+            return r;
+        }).reverse();
     },
 
     getReflectionsByDate: (dateStr) => {
         const all = getRows(SHEET_NAMES.REFLECTIONS);
-        // Date comparison might need consistent formatting. 
-        // Storing dates as 'YYYY-MM-DD' strings is safest for simple match.
-        return all.filter(r => r.class_date === dateStr);
+        // Fix: Handle Date objects from Sheets
+        return all.filter(r => {
+            let d = r.class_date;
+            if (d instanceof Date) {
+                // Convert to YYYY-MM-DD in local time (or UTC? Sheets usually local)
+                // Using Utilities.formatDate is best in GAS
+                d = Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+            }
+            return d === dateStr;
+        });
     },
 
     getFeedback: (reflectionId) => {

@@ -183,7 +183,13 @@ const TeacherAPI = {
 
         // distinct dates
         const allReflections = getRows(SHEET_NAMES.REFLECTIONS);
-        const dates = [...new Set(allReflections.map(r => r.class_date))].sort().reverse();
+        const dates = [...new Set(allReflections.map(r => {
+            let d = r.class_date;
+            if (d instanceof Date) {
+                d = Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+            }
+            return d;
+        }))].sort().reverse();
 
         return { students: list, dates: dates };
     },
