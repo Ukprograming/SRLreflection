@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRL Reflection - Student</title>
+    <link rel="stylesheet" href="../shared/styles.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <!-- Login View -->
+        <div id="login-view" class="card">
+            <h2>生徒ログイン</h2>
+            <form id="login-form">
+                <input type="text" id="student-id" placeholder="生徒ID" required>
+                <input type="text" id="class-code" placeholder="クラスコード" required>
+                <label>
+                    <input type="checkbox" id="remember-me"> このデバイスに保存
+                </label>
+                <button type="submit">ログイン</button>
+            </form>
+        </div>
+
+        <!-- Dashboard View (After Login) -->
+        <div id="dashboard-view" class="hidden">
+            <header>
+                <span id="user-display"></span>
+                <button id="logout-btn">ログアウト</button>
+            </header>
+            
+            <div id="reflection-form-container" class="card">
+                <h3>本日のリフレクション</h3>
+                <form id="reflection-form">
+                    <!-- Dynamic Questions Here -->
+                </form>
+            </div>
+
+            <div class="card">
+                <button id="show-history-btn">過去の記録を見る</button>
+            </div>
+            
+            <div id="history-view" class="hidden">
+                <h3>振り返り履歴</h3>
+                <canvas id="codes-chart"></canvas>
+                <div id="history-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="feedback-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>新着フィードバック</h3>
+            <div id="feedback-content"></div>
+        </div>
+    </div>
+
+    <script src="../shared/utils.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

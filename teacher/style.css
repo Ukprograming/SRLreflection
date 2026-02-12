@@ -1,0 +1,23 @@
+/* Teacher specific styles */
+.hidden {
+    display: none;
+}
+
+.reflection-text {
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    margin: 10px 0;
+    white-space: pre-wrap;
+}
+
+mark {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

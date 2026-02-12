@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRL Reflection - Teacher</title>
+    <link rel="stylesheet" href="../shared/styles.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <!-- Login View -->
+        <div id="login-view" class="card">
+            <h2>教員ログイン</h2>
+            <form id="login-form">
+                <input type="text" id="teacher-id" placeholder="教員ID" required>
+                <input type="text" id="class-code" placeholder="クラスコード" required>
+                <input type="password" id="teacher-secret" placeholder="シークレット" required>
+                <button type="submit">ログイン</button>
+            </form>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboard-view" class="hidden">
+            <header>
+                <h1>教員ダッシュボード</h1>
+                <button id="logout-btn">ログアウト</button>
+            </header>
+
+            <div class="card controls">
+                <select id="date-select">
+                    <option value="">日付を選択...</option>
+                </select>
+                <button id="refresh-btn">更新</button>
+            </div>
+
+            <div id="student-list" class="card">
+                <!-- List of students who submitted -->
+            </div>
+
+            <!-- Student Card (Hidden by default) -->
+            <div id="student-card" class="card hidden">
+                <div class="card-header">
+                    <button id="prev-student">&lt;</button>
+                    <h3 id="student-name">生徒名</h3>
+                    <button id="next-student">&gt;</button>
+                </div>
+
+                <div id="reflection-content" class="reflection-text">
+                    <!-- Reflection content goes here, selectable -->
+                </div>
+
+                <div class="coding-tools">
+                    <label>方略コード付与:</label>
+                    <select id="code-select">
+                        <!-- Options populated from Spreadsheet -->
+                    </select>
+                    <button id="apply-code-btn">マーク</button>
+                </div>
+
+                <div class="feedback-section">
+                    <h4>フィードバック</h4>
+                    <textarea id="feedback-text" rows="3"></textarea>
+                    <button id="save-feedback-btn">送信</button>
+                </div>
+
+                <div class="charts">
+                    <canvas id="student-code-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>設定</h3>
+                <button id="set-next-questions-btn">次回設問設定</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/utils.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
