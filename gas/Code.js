@@ -172,7 +172,8 @@ const TeacherAPI = {
         }
 
         const list = students.map(s => {
-            const sub = submissions.find(r => r.student_id === s.student_id);
+            // Fix: Compare as strings to handle numeric IDs from Sheets
+            const sub = submissions.find(r => String(r.student_id) === String(s.student_id));
             return {
                 student_id: s.student_id,
                 name: s.name,
@@ -195,7 +196,7 @@ const TeacherAPI = {
     },
 
     getStudentCard: (payload) => {
-        const studentId = payload.student_id;
+        const studentId = String(payload.student_id);
         if (!studentId) throw new Error("Student ID required");
 
         // Get Student Info

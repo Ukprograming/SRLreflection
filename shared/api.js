@@ -1,4 +1,4 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbxymGEFfTmdUbC0Z8357foDLmxpHS5eZrVA9g-givLpxUPmp7Liqan3dhNdEfZO-BA3/exec'; // Placeholder
+const API_URL = 'https://script.google.com/macros/s/AKfycbxkigQHCukgui_U1MgrQ8_szrRd7mD4kDRrkC8h0osNtPH58liJiVbxo_GpNhZOnAws/exec'; // Placeholder
 
 /**
  * Sends a POST request to the GAS Web App.

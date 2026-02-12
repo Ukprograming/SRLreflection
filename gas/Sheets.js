@@ -140,7 +140,7 @@ const DB = {
 
     getReflectionsByStudent: (studentId) => {
         const all = getRows(SHEET_NAMES.REFLECTIONS);
-        const filtered = all.filter(r => r.student_id === studentId);
+        const filtered = all.filter(r => String(r.student_id) === String(studentId));
         // Normalize dates for frontend
         return filtered.map(r => {
             if (r.class_date instanceof Date) {
